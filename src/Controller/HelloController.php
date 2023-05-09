@@ -11,7 +11,10 @@ class HelloController extends AbstractController
     private array $messages = ["Hello", "Hey", "Bye!"];
     #[Route('/{limit<\d+>?3}',name: 'app_index')]
     public function index(int $limit) {
-        return new Response(implode(',', array_splice($this->messages,0,$limit)));
+        return $this->render('hello/index.html.twig',
+            [
+                'message' => implode(',', array_splice($this->messages,0,$limit))
+            ]);
     }
     #[Route('/messages/{id<\d+>}',name: 'app_show_one')]
     public function showOne($id) : Response
